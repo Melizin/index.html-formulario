@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Orçamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input, textarea, button {
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        input[type="text"], input[type="tel"], input[type="email"], textarea {
+            background-color: #2b2b2b;
+            color: #ffffff;
+        }
+
+        button {
+            background-color: #6200ee;
+            color: #ffffff;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .radio-group input {
+            margin: 0 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="budgetForm">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="seu nome" required>
+           
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="número com DDD" required>
+           
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seu e-mail" required>
+           
+            <label for="mensagem">Como podemos te ajudar?</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Descreva seu pedido aqui" required></textarea>
+           
+            <label for="confirma">Descrevi exatamente o que preciso acima?</label>
+            <div class="radio-group">
+                <input type="radio" id="confirmaSim" name="confirma" value="sim" required>
+                <label for="confirmaSim">Sim</label>
+                <input type="radio" id="confirmaNao" name="confirma" value="não" required>
+                <label for="confirmaNao">Não</label>
+            </div>
+           
+            <button type="submit">PEDIR ORÇAMENTO</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('budgetForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+           
+            const nome = document.getElementById('nome').value;
+            const telefone = document.getElementById('telefone').value;
+            const email = document.getElementById('email').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const confirma = document.querySelector('input[name="confirma"]:checked').value;
+
+            const body = `Nome: ${nome}\nTelefone: ${telefone}\nEmail: ${email}\nMensagem: ${mensagem}\nConfirma: ${confirma}`;
+            const mailtoLink = `mailto:mariasampaioana7@gmail.com?subject=Pedido de Orçamento&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</html>
